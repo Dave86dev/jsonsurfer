@@ -8,18 +8,15 @@ export const JsonRender = ({ json, selectFunction }) => {
 
   //Recursive
   const renderData = (json, depth = 0, actualRoute = "") => {
-    if (json === null || json === undefined) {
-      return <span className="jsonError">Invalid JSON</span>
-    }
 
-    if (typeof json === "object") {
+    if (typeof json === "object" && json !== null) {
       if (Array.isArray(json)) {
         //Arrays loop
         return (
           <span>
             [<br />
             {json.map((item, index) => (
-              <span key={item}>
+              <span key={`${actualRoute}[${index}]`}>
                 <span style={{ paddingLeft: `${depth * 1.2}em` }}>
                   {renderData(
                     item, 
@@ -43,10 +40,10 @@ export const JsonRender = ({ json, selectFunction }) => {
             {Object.entries(json).map(([key, val], index) => {
               const newPath = actualRoute ? `${actualRoute}.${key}` : key
               return (
-                <span key={key} style={{ paddingLeft: `${depth * 1.2}em` }}>
+                <span key={`${actualRoute}.${key}`} style={{ paddingLeft: `${depth * 1.2}em` }}>
                   <span
                     className={Array.isArray(val) ? "" : "elementClick"}
-                    onClick={() => typeof val !== "object" && clickHandler(newPath, String(val))}
+                    onClick={() => (typeof val !== "object" || val === null) && clickHandler(newPath, String(val))}
                   >
                     {key}
                   </span>

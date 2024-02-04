@@ -15,15 +15,17 @@ export const explorer = (json, criteria) => {
             for(const [key, val] of Object.entries(json)){
                 const newPath = actualRoute ? `${actualRoute}.${key}` : key
                 if(newPath === criteria){
-                    //bingo! we have got it
-                    return String(val)
+                    //format in case of null or object (avoiding [object Object])
+                    if (val === null) {
+                        return "null"
+                    } else if (typeof val !== "object"){
+                        return String(val)
+                    }
                 }
             const result = recursiveSearch(val, depth + 1, newPath)
             if (result) return result
-            }
-            
+            }           
         }
-
         return undefined
     }
 
