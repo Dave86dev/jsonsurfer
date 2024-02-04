@@ -19,20 +19,25 @@ export const JsonRender = ({ json }) => {
           <span>
             [<br />
             {json.map((item, index) => (
-              <span key={index}>{renderData(item, depth + 1)}</span>
+              <span key={index}>
+                <span style={{ paddingLeft: `${depth * 1.2}em`}}>
+                {renderData(item, depth + 1)}
+                </span>
+                <br/>
+                </span>
             ))}
-            <span>]</span>
+            <span style={{ paddingLeft: `${depth -1 * 1.2}em`}}>]</span>
           </span>
         )
       } else {
         //Objects loop
         return (
           <span> 
-            {"{"}
+            {depth === 0 ? "" : "{"}
             <br />
             {Object.entries(json).map(([key, val], index) => {
               return (
-                <span key={key}>
+                <span key={key} style={{ paddingLeft: `${depth * 1.2}em`}}>
                     <span
                         className={Array.isArray(val) ? "" : "elementClick"}
                         onClick={()=> (typeof(val) !== "object") && clickHandler(val)}
@@ -43,7 +48,9 @@ export const JsonRender = ({ json }) => {
                 </span>
               )
             })}
-            {"}"}
+            <span style={{ paddingLeft: `${depth * 0.7}em`}}>
+            {depth === 0 ? "" : "}"}
+            </span>
           </span>
         )
       }
