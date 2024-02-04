@@ -1,0 +1,15 @@
+{
+    "date": "2023-09-03T07:25:11.896Z",
+    "hasError": true,
+    "checked": false,
+    "form": [
+        {
+            "id": "9r87uy65tre9",
+            "bank": "iban",
+            "unique": "SA54126652985812324778",
+            "hasError": false,
+            "test1": null,
+            "test2": 1989
+        }
+    ]
+}

@@ -1,34 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css"
+import React, { useState, useEffect } from "react"
+
+import json from "./data/demoData.json"
+import { JsonRender } from "./components/JsonRender/JsonRender"
+import { explorer } from "./utils/explorer"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selected, setSelected] = useState({
+    path: "",
+    value: "",
+  })
+
+  const [criteria, setCriteria] = useState("")
+
+  //Handles active user search
+  useEffect(() => {
+    if (criteria === "") {
+      setSelected((prevState) => ({
+        ...prevState,
+        value: "",
+      }))
+    } else {
+      //Criteria is not empty, hence we search!
+
+      let res = explorer(json, criteria);
+
+      //explorer.js recursive search function can return undefined as a value, we format in case
+      if (res === undefined) {
+        res = "undefined"
+      }
+      setSelected({
+        path: "",
+        value: res,
+      })
+    }
+  }, [criteria])
+
+  const inputHandler = (e) => {
+    setCriteria(e.target.value)
+  }
+  
+  //Displays key and value selected by user
+  const jsonSelected = (path, value) => {
+    setSelected({ path, value })
+
+    //by reseting user input we ensure our selection path is displayed
+    setCriteria("")
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="mainContainer">
+      <div className="answer">
+        <h4>Property</h4>
+        <input
+          className="input"
+          type="text"
+          value={criteria || selected.path || ""}
+          onChange={inputHandler}
+        />
+        <div className="value">{selected.value}</div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <h4>Response</h4>
+      <JsonRender json={json} selectFunction={jsonSelected} />
+    </div>
   )
 }
 
