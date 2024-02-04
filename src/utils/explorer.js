@@ -16,7 +16,7 @@ export const explorer = (json, criteria) => {
                 const newPath = actualRoute ? `${actualRoute}.${key}` : key
                 if(newPath === criteria){
                     //bingo! we have got it
-                    return val
+                    return String(val)
                 }
             const result = recursiveSearch(val, depth + 1, newPath)
             if (result) return result

@@ -16,8 +16,23 @@ function App() {
   const [criteria, setCriteria] = useState("")
 
   useEffect(()=>{
-    let res = explorer(json, criteria)
-    console.log(res, "comes back from the search function")
+    if(criteria === ""){
+       setSelected((prevState) => ({
+        ...prevState,
+        value: ""
+       }))
+    } else{
+      //Criteria is not empty, hence we search!
+    
+      let res = explorer(json, criteria)
+
+      setSelected({
+        path: "",
+        value: res
+      })
+    
+    }
+    
   },[criteria])
 
   const inputHandler = (e) => {
