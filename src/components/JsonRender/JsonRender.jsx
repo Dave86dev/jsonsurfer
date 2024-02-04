@@ -1,9 +1,9 @@
 import "./JsonRender.css"
 
 export const JsonRender = ({ json, selectFunction }) => {
+  
   const clickHandler = (path, val) => {
-    console.log("the path to victory! ;-)", path)
-    selectFunction(path, val)
+      selectFunction(path, val)
   }
 
   //Recursive

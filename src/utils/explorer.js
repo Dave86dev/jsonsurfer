@@ -1,12 +1,12 @@
 export const explorer = (json, criteria) => {
     
     //Recursive
-    const recursiveSearch = (json, depth = 0, actualRoute = "") => {
+    const recursiveSearch = (json, actualRoute = "") => {
         
         if(Array.isArray(json)){
             //Arrays loop.
             for(let i = 0; i < json.length; i++){
-                const result = recursiveSearch(json[i], depth + 1, `${actualRoute}[${i}]`)
+                const result = recursiveSearch(json[i], `${actualRoute}[${i}]`)
                 if (result) return result
             }
 
@@ -22,7 +22,7 @@ export const explorer = (json, criteria) => {
                         return String(val)
                     }
                 }
-            const result = recursiveSearch(val, depth + 1, newPath)
+            const result = recursiveSearch(val, newPath)
             if (result) return result
             }           
         }
