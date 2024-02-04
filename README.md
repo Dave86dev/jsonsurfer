@@ -19,6 +19,10 @@ We have been assigned to develop an application in React, designed to read and n
 
 ## Production
 
+<div align="center">
+    <a href="https://master.dd2jgvazze1w9.amplifyapp.com/"><strong>PRODUCTION LINK</strong></a> 
+</div>
+
 ## Installation 
 
 If, however, you prefer to install the application locally on your computer, please feel free to follow the steps outlined below. These will guide you through cloning the repository onto your machine and setting up the app to run.
