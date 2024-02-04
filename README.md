@@ -10,7 +10,6 @@ We have been assigned to develop an application in React, designed to read and n
 - [Functionality / Code Decisions](#functionality)
 - [Known Bugs](#known-bugs)
 - [To Improve](#to-improve)
-- [Acknowledgements](#acknowledgements)
 - [Author](#author)
 
 
