@@ -17,15 +17,19 @@ export const JsonRender = ({ json }) => {
         //Arrays loop
         return (
           <span>
+            [<br />
             {json.map((item, index) => (
               <span key={index}>{renderData(item, depth + 1)}</span>
             ))}
+            <span>]</span>
           </span>
         )
       } else {
         //Objects loop
         return (
-          <span>
+          <span> 
+            {"{"}
+            <br />
             {Object.entries(json).map(([key, val], index) => {
               return (
                 <span key={key}>
@@ -39,6 +43,7 @@ export const JsonRender = ({ json }) => {
                 </span>
               )
             })}
+            {"}"}
           </span>
         )
       }
