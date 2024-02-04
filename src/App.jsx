@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import "./App.css"
 
 import json from "./data/demoData.json"
 import { JsonRender } from "./components/JsonRender/JsonRender"
+import { explorer } from './utils/explorer'
 
 function App() {
 
@@ -12,22 +13,27 @@ function App() {
     value: ""
   })
 
+  const [criteria, setCriteria] = useState("")
+
+  useEffect(()=>{
+    let res = explorer(json, criteria)
+    console.log(res, "comes back from the search function")
+  },[criteria])
+
   const inputHandler = (e) => {
-    console.log(e.target.value)
+    setCriteria(e.target.value)
   }
 
   const jsonSelected = (path, value) => {
-
-    console.log(path, value, " so far so good...")
-
     setSelected({ path, value})
+    setCriteria("")
   }
 
   return (
     <>
       <input 
         type="text"
-        value={selected.path || ""}
+        value={criteria || selected.path || ""}
         onChange={inputHandler}
       />
       {selected.value}
