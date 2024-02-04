@@ -1,7 +1,6 @@
 import "./JsonRender.css"
 
 export const JsonRender = ({ json }) => {
-
   const clickHandler = (val) => {
     console.log("ou yeah, the value is... ", val)
   }
@@ -19,44 +18,47 @@ export const JsonRender = ({ json }) => {
           <span>
             [<br />
             {json.map((item, index) => (
-              <span key={index}>
-                <span style={{ paddingLeft: `${depth * 1.2}em`}}>
-                {renderData(item, depth + 1)}
+              <span key={item}>
+                <span style={{ paddingLeft: `${depth * 1.2}em` }}>
+                  {renderData(item, depth + 1)}
                 </span>
-                <br/>
-                </span>
+                {index < json.length - 1 ? "," : ""}
+                <br />
+              </span>
             ))}
-            <span style={{ paddingLeft: `${depth -1 * 1.2}em`}}>]</span>
+            <span style={{ paddingLeft: `${depth - 1 * 1.2}em` }}>]</span>
           </span>
         )
       } else {
         //Objects loop
         return (
-          <span> 
+          <span>
             {depth === 0 ? "" : "{"}
             <br />
             {Object.entries(json).map(([key, val], index) => {
               return (
-                <span key={key} style={{ paddingLeft: `${depth * 1.2}em`}}>
-                    <span
-                        className={Array.isArray(val) ? "" : "elementClick"}
-                        onClick={()=> (typeof(val) !== "object") && clickHandler(val)}
-                    >
-                        {key}
-                    </span>:{" "}{renderData(val, depth + 1)}
+                <span key={key} style={{ paddingLeft: `${depth * 1.2}em` }}>
+                  <span
+                    className={Array.isArray(val) ? "" : "elementClick"}
+                    onClick={() => typeof val !== "object" && clickHandler(val)}
+                  >
+                    {key}
+                  </span>
+                  : {renderData(val, depth + 1)}
+                  {index < Object.entries(json).length - 1 ? "," : ""}
                   <br />
                 </span>
               )
             })}
-            <span style={{ paddingLeft: `${depth * 0.7}em`}}>
-            {depth === 0 ? "" : "}"}
+            <span style={{ paddingLeft: `${depth * 0.7}em` }}>
+              {depth === 0 ? "" : "}"}
             </span>
           </span>
         )
       }
+    } else {
+      return typeof json === "string" ? `'${json}'` : String(json)
     }
-    return String(json)
   }
-
   return renderData(json)
 }
