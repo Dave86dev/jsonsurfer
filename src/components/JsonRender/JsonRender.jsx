@@ -1,10 +1,15 @@
-import "./JsonRender.css";
+import "./JsonRender.css"
 
 export const JsonRender = ({ json }) => {
+
+  const clickHandler = (val) => {
+    console.log("ou yeah, the value is... ", val)
+  }
+
   //Recursive
   const renderData = (json, depth = 0) => {
     if (json === null || json === undefined) {
-      return <span className="jsonError">Invalid JSON</span>;
+      return <span className="jsonError">Invalid JSON</span>
     }
 
     if (typeof json === "object") {
@@ -16,7 +21,7 @@ export const JsonRender = ({ json }) => {
               <span key={index}>{renderData(item, depth + 1)}</span>
             ))}
           </span>
-        );
+        )
       } else {
         //Objects loop
         return (
@@ -26,19 +31,20 @@ export const JsonRender = ({ json }) => {
                 <span key={key}>
                     <span
                         className={Array.isArray(val) ? "" : "elementClick"}
+                        onClick={()=> (typeof(val) !== "object") && clickHandler(val)}
                     >
                         {key}
                     </span>:{" "}{renderData(val, depth + 1)}
                   <br />
                 </span>
-              );
+              )
             })}
           </span>
-        );
+        )
       }
     }
-    return String(json);
-  };
+    return String(json)
+  }
 
-  return renderData(json);
-};
+  return renderData(json)
+}
