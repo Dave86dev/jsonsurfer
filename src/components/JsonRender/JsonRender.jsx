@@ -67,5 +67,5 @@ export const JsonRender = ({ json, selectFunction }) => {
       return typeof json === "string" ? `'${json}'` : String(json)
     }
   }
-  return renderData(json)
+  return <div className="jsonContainer">{renderData(json)}</div>
 }

@@ -1,6 +1,13 @@
+.jsonContainer {
+  height: 25em;
+  width: 45em;
+  overflow-y: auto;
+  overflow-x: auto;
 
-.jsonError {
-  color: red;
+  padding: 0em 0em 0.5em 0.5em;
+  
+  border-radius: 0.5em;
+  border: 0.05em solid grey;
 }
 
 .elementClick {

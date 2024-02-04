@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+  
+    height: 100vh;
+    width: 100vw;
+  
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  
+  h4 {
+    margin: 0 0 0.5em 0;
+  }
+  
+  .mainContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
+  }
+  
+  .answer {
+    display: flex;
+    flex-direction: column;
+  
+    margin-bottom: 4em;
+  }
+  
+  .input {
+    height: 3em;
+    width: 30em;
+  
+    border-radius: 0.5em;
+    border: 0.05em solid grey;
+  }
+  
+  .input:focus {
+    box-shadow: 0 0 0.7em rgba(0, 0, 255, 0.4);
+    outline: none;
+  }
+  
+  .value {
+    height: 1em;
+  }
