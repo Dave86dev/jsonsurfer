@@ -1,4 +1,8 @@
-
 .jsonError {
-    color: red;
+  color: red;
+}
+
+.elementClick {
+  color: blue;
+  cursor: pointer;
 }

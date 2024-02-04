@@ -24,7 +24,11 @@ export const JsonRender = ({ json }) => {
             {Object.entries(json).map(([key, val], index) => {
               return (
                 <span key={key}>
-                  {key} : {renderData(val, depth + 1)}
+                    <span
+                        className={Array.isArray(val) ? "" : "elementClick"}
+                    >
+                        {key}
+                    </span>:{" "}{renderData(val, depth + 1)}
                   <br />
                 </span>
               );
