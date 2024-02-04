@@ -13,9 +13,13 @@ export const explorer = (json, criteria) => {
         } else if (typeof(json) === "object" && json !== null) {
             //Objects loops, looking for our target.
             for(const [key, val] of Object.entries(json)){
+                // not falsy actualRoute is added to the path, otherwise we provide just key
                 const newPath = actualRoute ? `${actualRoute}.${key}` : key
                 if(newPath === criteria){
-                    //format in case of null or object (avoiding [object Object])
+                    /*
+                      found!;_)
+                      format in case of null or object (avoiding [object Object])
+                    */
                     if (val === null) {
                         return "null"
                     } else if (typeof val !== "object"){

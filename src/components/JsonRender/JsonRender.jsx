@@ -2,6 +2,7 @@ import "./JsonRender.css"
 
 export const JsonRender = ({ json, selectFunction }) => {
   
+  //Emit functionality, delivers selected path and value to UI
   const clickHandler = (path, val) => {
       selectFunction(path, val)
   }
@@ -18,6 +19,7 @@ export const JsonRender = ({ json, selectFunction }) => {
             {json.map((item, index) => (
               <span key={`${actualRoute}[${index}]`}>
                 <span style={{ paddingLeft: `${depth * 1.2}em` }}>
+                  {/* Rendering more deep inside the array for each item */}
                   {renderData(
                     item, 
                     depth + 1,
@@ -38,10 +40,12 @@ export const JsonRender = ({ json, selectFunction }) => {
             {depth === 0 ? "" : "{"}
             <br />
             {Object.entries(json).map(([key, val], index) => {
+              // not falsy actualRoute is added to the path, otherwise we provide just key
               const newPath = actualRoute ? `${actualRoute}.${key}` : key
               return (
                 <span key={`${actualRoute}.${key}`} style={{ paddingLeft: `${depth * 1.2}em` }}>
                   <span
+                    // If the value of the key is an array, we make it non clickable and without blue color
                     className={Array.isArray(val) ? "" : "elementClick"}
                     onClick={() => (typeof val !== "object" || val === null) && clickHandler(newPath, String(val))}
                   >
@@ -52,6 +56,7 @@ export const JsonRender = ({ json, selectFunction }) => {
                       depth + 1,
                       newPath
                     )}
+                  {/* if index is the actual length of the object, we don't render comma, otherwise yes */}
                   {index < Object.entries(json).length - 1 ? "," : ""}
                   <br />
                 </span>
@@ -64,6 +69,7 @@ export const JsonRender = ({ json, selectFunction }) => {
         )
       }
     } else {
+      //In case it's primitive data types (number, string, bool..), we render here
       return typeof json === "string" ? `'${json}'` : String(json)
     }
   }

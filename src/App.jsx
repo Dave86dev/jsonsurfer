@@ -13,6 +13,7 @@ function App() {
 
   const [criteria, setCriteria] = useState("")
 
+  //Handles active user search
   useEffect(() => {
     if (criteria === "") {
       setSelected((prevState) => ({
@@ -23,6 +24,8 @@ function App() {
       //Criteria is not empty, hence we search!
 
       let res = explorer(json, criteria);
+
+      //explorer.js recursive search function can return undefined as a value, we format in case
       if (res === undefined) {
         res = "undefined"
       }
@@ -36,9 +39,12 @@ function App() {
   const inputHandler = (e) => {
     setCriteria(e.target.value)
   }
-
+  
+  //Displays key and value selected by user
   const jsonSelected = (path, value) => {
     setSelected({ path, value })
+
+    //by reseting user input we ensure our selection path is displayed
     setCriteria("")
   }
 
