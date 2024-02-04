@@ -1,3 +1,4 @@
-export const explorer = () => {
-    return "hi folks let's rock!"
+export const explorer = (json, criteria) => {
+    console.log("criteria received ok", criteria)
+    return true 
 }
