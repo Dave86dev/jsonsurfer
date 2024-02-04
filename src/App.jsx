@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-
 import "./App.css"
+import React, { useState, useEffect } from 'react'
 
 import json from "./data/demoData.json"
 import { JsonRender } from "./components/JsonRender/JsonRender"
@@ -16,8 +15,25 @@ function App() {
   const [criteria, setCriteria] = useState("")
 
   useEffect(()=>{
-    let res = explorer(json, criteria)
-    console.log(res, "comes back from the search function")
+    if(criteria === ""){
+       setSelected((prevState) => ({
+        ...prevState,
+        value: ""
+       }))
+    } else{
+      //Criteria is not empty, hence we search!
+    
+      let res = explorer(json, criteria)
+      if(res === undefined){
+        res = "undefined"
+      }
+      setSelected({
+        path: "",
+        value: res
+      })
+    
+    }
+    
   },[criteria])
 
   const inputHandler = (e) => {
