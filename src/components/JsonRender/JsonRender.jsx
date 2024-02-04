@@ -1,8 +1,8 @@
 import "./JsonRender.css"
 
-export const JsonRender = ({ json }) => {
-  const clickHandler = (val) => {
-    console.log("ou yeah, the value is... ", val)
+export const JsonRender = ({ json, selectFunction }) => {
+  const clickHandler = (path, val) => {
+    selectFunction(path, val)
   }
 
   //Recursive
@@ -40,7 +40,7 @@ export const JsonRender = ({ json }) => {
                 <span key={key} style={{ paddingLeft: `${depth * 1.2}em` }}>
                   <span
                     className={Array.isArray(val) ? "" : "elementClick"}
-                    onClick={() => typeof val !== "object" && clickHandler(val)}
+                    onClick={() => typeof val !== "object" && clickHandler(key, val)}
                   >
                     {key}
                   </span>
